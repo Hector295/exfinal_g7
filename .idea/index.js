@@ -13,6 +13,7 @@ var hash = sha256.create();
 const multer = require('multer')
 let upload = multer();
 let crypto = require('crypto');
+let usuario='';
 
 
 let conn = mysql.createConnection({
@@ -36,7 +37,8 @@ conn.connect(function (err) {
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.post('/acceder', upload.none(), function (req, res) {
+app.use(bodyParser.json());
+app.post('/acceder', function (req, res) {
     let usuario = req.body.usuario;
     let contra = req.body.contra;
     var hashpassword = crypto.createHash("sha256");
@@ -56,20 +58,17 @@ app.post('/acceder', upload.none(), function (req, res) {
                 console.log(error);
             } else {
                 console.log("exito");
-                res.redirect('/chat');
+                res.sendFile(__dirname + '/chat.html');
             }
-            res.end();
+            //res.end();
         });
     } else {
-        res.send('Please enter Username and Password!');
+        res.send('Los campos deben estar llenos');
         res.end();
     }
 });
 app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/login.html');
-});
-app.get('/chat', function (req, res) {
-    res.sendFile(__dirname + '/chat.html');
 });
 
 app.listen(3000, function () {
@@ -81,6 +80,7 @@ io.on('connection', function (socket) {
     console.log("Usuario Conectado");
     conexiones++;
     io.emit('rpta', conexiones);
+    io.emit('userConect',usuario);
 
     socket.on('disconnect', function () {
         console.log('Usuario Desconectado');
