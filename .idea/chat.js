@@ -30,8 +30,8 @@ server.listen(3000,function(){
     console.log("Servidor corriendo en el puerto 3000");
 });
 
-app.get('/chatroom',function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+app.get('/chat',function (req, res) {
+    res.sendFile(__dirname + '/chat.html');
 });
 
 io.on('connection', function (socket) {
