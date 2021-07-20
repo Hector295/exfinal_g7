@@ -52,12 +52,10 @@ app.post('/acceder', upload.none(), function (req, res) {
                 res.redirect('/login');
             }
             if (results[0] == null) {
-                res.send('¡Usuario y/o Contraseña no válidos!');
+                res.redirect('/login');
                 console.log(error);
             } else {
                 console.log("exito");
-                //req.session.loggedin = true;
-                // req.session.username = username;
                 res.redirect('/chat');
             }
             res.end();
@@ -78,9 +76,6 @@ app.listen(3000, function () {
     console.log("Servidor corriendo en el puerto 3000");
 });
 
-app.get('/chat',function (req, res) {
-    res.sendFile(__dirname + '/chat.html');
-});
 
 io.on('connection', function (socket) {
     console.log("Usuario Conectado");
