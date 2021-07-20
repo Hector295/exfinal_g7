@@ -20,7 +20,7 @@ let conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'pruebafinal',
+    database: 'exfinal_g7',
     port: 3306,
     typeCast: function (field,next){
         if(field.type === 'BIT'){
