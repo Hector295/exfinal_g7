@@ -1,0 +1,15 @@
+Usuarios y contraseñas:
+-fabrizio
+-fabrizio123
+
+-hector 
+-hector123
+
+-ronaldo
+-ronaldo123
+
+-stuardo
+-stuardo123
+
+-oscar
+-oscar123
