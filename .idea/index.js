@@ -52,10 +52,10 @@ app.post('/acceder', upload.none(), function (req, res) {
                 res.redirect('/login');
             }
             if (results[0] == null) {
-                res.send('¡Usuario y/o Contraseña no válidos!');
+                res.send('¡Usuario y/o contraseña no válidos!');
                 console.log(error);
             } else {
-                console.log("exito");
+                console.log("éxito");
                 //req.session.loggedin = true;
                 // req.session.username = username;
                 res.redirect('/chat');
@@ -63,7 +63,7 @@ app.post('/acceder', upload.none(), function (req, res) {
             res.end();
         });
     } else {
-        res.send('Please enter Username and Password!');
+        res.send('!Por favor ingrese su username y password!');
         res.end();
     }
 });
@@ -78,10 +78,11 @@ app.listen(3000, function () {
     console.log("Servidor corriendo en el puerto 3000");
 });
 
-app.get('/chat',function (req, res) {
+app.get('/chat', function (req, res) {
     res.sendFile(__dirname + '/chat.html');
 });
 
+var conexiones = 0;
 io.on('connection', function (socket) {
     console.log("Usuario Conectado");
     conexiones++;
@@ -98,6 +99,7 @@ io.on('connection', function (socket) {
     socket.on('chat_message', function (data) {
         console.log(socket.id + ": " + data);
         socket.broadcast.emit('chat', data, users[socket.id]);
+        io.emit('chat', data);
     });
 
     socket.on('username', function (username) {

@@ -52,7 +52,7 @@
         <link href="index.js">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
-            $(function () {
+            $(document).ready(function () {
 
                 var socket = io();
                 socket.emit('username', username);
@@ -80,7 +80,7 @@
 
     </head>
     <body>
-        <p>Usuario conectados: <span id="uc">0</span></p>
+        <p>Usuarios conectados: <span id="uc"></span></p>
         <textarea id="users"></textarea>
         <ul id="chat_message"></ul>
         <form action="">
