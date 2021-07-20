@@ -78,3 +78,14 @@ app.get('/chat',function (req, res) {
 app.listen(3000, function () {
     console.log("Servidor corriendo en el puerto 3000");
 });
+
+io.on('connection', function(socket){
+    console.log("Usuario conectado");
+
+    socket.on('disconnect', function(){
+        console.log("Usuario desconectado");
+    })
+
+    socket.on('chat message')
+
+    })
